@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lana Lana Lana Lana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS PIXEL & BENTO STYLING --- */
+        :root {
+            --bg-color: #f0f0e6;
+            --bento-border: #2c2c2c;
+            --accent-pink: #ff8e8e;
+            --accent-blue: #8ecfff;
+            --accent-gray: #d4d4d4;
+            --text-pixel: #2c2c2c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* Agar teks tidak terblok saat panik ngeklik */
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(44, 44, 44, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(44, 44, 44, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'VT323', monospace;
+            overflow: hidden;
+        }
+
+        .bento-container {
+            background: #ffffff;
+            border: 4px solid var(--bento-border);
+            box-shadow: 10px 10px 0px var(--bento-border);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: var(--text-pixel);
+            margin-bottom: 20px;
+            border-bottom: 4px solid var(--bento-border);
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.4rem;
+            color: #444;
+            margin-bottom: 25px;
+            min-height: 30px;
+        }
+
+        /* Tombol Pixel Global */
+        .pixel-btn {
+            font-family: 'VT323', monospace;
+            background: var(--accent-blue);
+            color: var(--bento-border);
+            border: 3px solid var(--bento-border);
+            padding: 8px 20px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--bento-border);
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .pixel-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+
+        /* Helper Classes */
+        .hidden { display: none !important; }
+        
+        .pixel-gif {
+            width: 120px;
+            image-rendering: pixelated;
+            margin-bottom: 15px;
+            border: 3px solid var(--bento-border);
+        }
+
+        /* --- STYLE KHUSUS QUIZ AREA (PERBAIKAN) --- */
+        #quiz-area {
+            position: relative;
+            width: 100%;
+            height: 250px; /* Area gerak lebih luas */
+            background: #fafafa;
+            border: 2px dashed var(--bento-border);
+            overflow: hidden; /* Agar tombol tidak lari keluar kotak */
+            margin-top: 10px;
+        }
+
+        /* Tombol Jawaban Benar (Diam di Tengah) */
+        #correctBtn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Benar-benar di tengah */
+            background-color: var(--accent-pink);
+            z-index: 10;
+        }
+
+        /* Tombol Jawaban Salah (Bisa Lari) */
+        #wrongBtn {
+            position: absolute;
+            /* Posisi awal manual supaya tidak tertumpuk */
+            top: 10%; 
+            left: 10%;
+            background-color: var(--accent-gray);
+            z-index: 20; /* Lebih tinggi dari tombol benar supaya kelihatan */
+            transition: top 0.1s ease, left 0.1s ease; /* Gerakan lebih responsif */
+        }
+
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="melting-kali-uchis.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="bento-container">
+        
+        <div id="page1">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHl5eXl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5/xT9IgN8YK58hJ7kG5O/giphy.gif" class="pixel-gif" alt="Start">
+            <h1>LANA.EXE</h1>
+            <p>kubikin tadi malem jir, btw klik tombol dibawah yeah</p>
+            <button class="pixel-btn" onclick="startExperience()">[ BARA KEREN. ]</button>
+        </div>
+
+        <div id="page2" class="hidden">
+            <h1>> MESSAGE LOG</h1>
+            <p id="typing-text"></p>
+            <button class="pixel-btn" onclick="nextPage()">[ CONTINUE ]</button>
+        </div>
+
+        <div id="page3" class="hidden">
+            <h1>> VERIFICATION</h1>
+            <p style="font-size: 1.2rem; margin-bottom:10px;">siapa yang paling pendek?</p>
+            
+            <div id="quiz-area">
+                <button class="pixel-btn" id="correctBtn" onclick="finish()">Lana <3</button>
+                <button class="pixel-btn" id="wrongBtn">Bara</button>
+            </div>
+        </div>
+
+        <div id="page4" class="hidden">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExODl4eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5/pE12f8sTnlxW4/giphy.gif" class="pixel-gif" alt="Win">
+            <h1>> gasalah lagi</h1>
+            <p><br>lana paling pendek, imut<br>wkwkwk semangat yaaa</p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- LOGIC ---
+
+        // Setup Audio & Page Navigation
+        function startExperience() {
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.5;
+            music.play().catch(e => console.log("Audio blocked"));
+            
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+            
+            typeWriter("> Good morning lann, semangat yea upraknya, goodluck.", "typing-text");
+        }
+
+        function nextPage() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+            // Trigger posisi acak pertama kali saat halaman dibuka
+            moveButton(); 
+        }
+
+        function finish() {
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('page4').classList.remove('hidden');
+        }
+
+        // --- CORE FIX: LOGIKA TOMBOL LARI ---
+        const wrongBtn = document.getElementById('wrongBtn');
+        const quizArea = document.getElementById('quiz-area');
+
+        function moveButton() {
+            // Hitung lebar area dikurangi lebar tombol
+            // Agar tombol tidak keluar garis (overflow)
+            const maxX = quizArea.clientWidth - wrongBtn.clientWidth - 20; 
+            const maxY = quizArea.clientHeight - wrongBtn.clientHeight - 20;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            // Terapkan posisi baru
+            wrongBtn.style.left = randomX + 'px';
+            wrongBtn.style.top = randomY + 'px';
+        }
+
+        // Tambahkan Event Listener yang Agresif
+        // Ini memastikan tombol lari saat disentuh, diklik, atau didekati
+        wrongBtn.addEventListener('mouseover', moveButton);
+        wrongBtn.addEventListener('click', moveButton);
+        wrongBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Mencegah klik di HP
+            moveButton();
+        });
+
+        // Typing Effect
+        function typeWriter(text, elementId) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            element.innerHTML = "";
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 60);
+                } else {
+                    element.innerHTML += "<span class='blink'>_</span>";
+                }
+            }
+            type();
+        }
+    </script>
+    
+    <style>
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+    </style>
+</body>
+</html>
