@@ -3,248 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lana Lana Lana Lana</title>
+    <title>My Fairytale <3</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS PIXEL & BENTO STYLING --- */
+        /* --- TEMA PIXEL FAIRYTALE --- */
         :root {
-            --bg-color: #f0f0e6;
-            --bento-border: #2c2c2c;
-            --accent-pink: #ff8e8e;
-            --accent-blue: #8ecfff;
-            --accent-gray: #d4d4d4;
-            --text-pixel: #2c2c2c;
+            --bg-gradient: linear-gradient(180deg, #ffc3a0 0%, #ffafbd 100%); /* Sunset Pastel */
+            --box-bg: #fffbf0;        /* Krem lembut */
+            --border-color: #ff9a9e;  /* Pink Border */
+            --text-main: #8d6e63;     /* Coklat (bukan hitam pekat) */
+            --btn-bg: #a18cd1;        /* Ungu Pastel */
+            --btn-hover: #fbc2eb;     /* Pink Pastel */
+            --heart-color: #ff6b6b;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none; /* Agar teks tidak terblok saat panik ngeklik */
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
 
         body {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: var(--bg-color);
-            background-image: 
-                linear-gradient(rgba(44, 44, 44, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(44, 44, 44, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
+            background: var(--bg-gradient);
             font-family: 'VT323', monospace;
             overflow: hidden;
+            position: relative;
+            color: var(--text-main);
         }
 
-        .bento-container {
-            background: #ffffff;
-            border: 4px solid var(--bento-border);
-            box-shadow: 10px 10px 0px var(--bento-border);
-            padding: 20px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            position: relative;
+        /* --- ANIMASI AWAN PIXEL (BACKGROUND) --- */
+        .cloud {
+            position: absolute;
+            background: #fff;
+            opacity: 0.6;
+            width: 100px; height: 30px;
+            box-shadow: 
+                20px -20px 0 0 #fff,
+                50px -20px 0 0 #fff,
+                30px 20px 0 0 #fff;
+            animation: floatCloud 20s linear infinite;
+            z-index: 1;
         }
+        
+        .c1 { top: 10%; left: -20%; animation-duration: 25s; transform: scale(0.8); }
+        .c2 { top: 30%; left: -20%; animation-duration: 35s; animation-delay: 5s; transform: scale(1.2); }
+        .c3 { top: 70%; left: -20%; animation-duration: 20s; animation-delay: 2s; }
+
+        @keyframes floatCloud {
+            0% { left: -20%; }
+            100% { left: 120%; }
+        }
+
+        /* --- CONTAINER UTAMA --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            background: var(--box-bg);
+            
+            /* Border Pixel Manis */
+            border: 4px solid var(--border-color);
+            box-shadow: 
+                8px 8px 0px rgba(255, 154, 158, 0.4), /* Bayangan Pink */
+                0 0 20px rgba(255, 255, 255, 0.5);    /* Glow Putih */
+            
+            padding: 30px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            border-radius: 4px; /* Sedikit rounded tapi tetap pixel feel */
+        }
+
+        /* Hiasan Hati di Pojok Container */
+        .container::before, .container::after {
+            content: "♥";
+            position: absolute;
+            color: var(--border-color);
+            font-size: 2rem;
+            top: -15px;
+        }
+        .container::before { left: 10px; transform: rotate(-15deg); }
+        .container::after { right: 10px; transform: rotate(15deg); }
 
         h1 {
             font-family: 'Press Start 2P', cursive;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: var(--text-pixel);
+            font-size: 1rem; 
+            line-height: 1.6;
+            color: var(--btn-bg);
             margin-bottom: 20px;
-            border-bottom: 4px solid var(--bento-border);
-            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 15px;
         }
 
-        p {
-            font-size: 1.4rem;
-            color: #444;
-            margin-bottom: 25px;
-            min-height: 30px;
+        p { 
+            font-size: 1.6rem; 
+            margin-bottom: 25px; 
+            line-height: 1.3;
         }
 
-        /* Tombol Pixel Global */
+        /* Tombol Pilihan Fairytale */
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        
         .pixel-btn {
             font-family: 'VT323', monospace;
-            background: var(--accent-blue);
-            color: var(--bento-border);
-            border: 3px solid var(--bento-border);
-            padding: 8px 20px;
-            font-size: 1.3rem;
+            background: #fff;
+            color: var(--btn-bg);
+            border: 2px solid var(--btn-bg);
+            padding: 10px 25px;
+            font-size: 1.4rem;
             cursor: pointer;
-            box-shadow: 4px 4px 0px var(--bento-border);
-            font-weight: bold;
-            text-transform: uppercase;
-            text-decoration: none;
-            display: inline-block;
+            box-shadow: 4px 4px 0px var(--btn-hover);
+            transition: all 0.2s;
+            border-radius: 8px; /* Lebih soft */
         }
 
-        .pixel-btn:active {
-            transform: translate(4px, 4px);
-            box-shadow: none;
+        .pixel-btn:hover {
+            background: var(--btn-bg);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 0px var(--btn-hover);
         }
 
-        /* Helper Classes */
+        .pixel-btn:active { transform: translateY(2px); box-shadow: 2px 2px 0px var(--btn-hover); }
+
+        /* Tombol Khusus */
+        .btn-yes { 
+            background: var(--btn-bg); color: #fff; 
+            border-color: var(--btn-bg);
+        }
+        
+        .btn-no { 
+            background: #ffecd2; color: #ff9a9e; 
+            border-color: #ff9a9e;
+        }
+
         .hidden { display: none !important; }
         
-        .pixel-gif {
-            width: 120px;
-            image-rendering: pixelated;
-            margin-bottom: 15px;
-            border: 3px solid var(--bento-border);
+        .gif-img { 
+            width: 120px; 
+            margin-bottom: 15px; 
+            border: 3px solid #fff; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 50%; /* Gambar jadi bulat */
         }
 
-        /* --- STYLE KHUSUS QUIZ AREA (PERBAIKAN) --- */
-        #quiz-area {
+        /* Area Khusus Tombol Lari */
+        #tricky-area {
             position: relative;
-            width: 100%;
-            height: 250px; /* Area gerak lebih luas */
-            background: #fafafa;
-            border: 2px dashed var(--bento-border);
-            overflow: hidden; /* Agar tombol tidak lari keluar kotak */
-            margin-top: 10px;
+            height: 220px;
+            background: rgba(255,255,255,0.5);
+            border: 2px dashed var(--border-color);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
         }
-
-        /* Tombol Jawaban Benar (Diam di Tengah) */
-        #correctBtn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* Benar-benar di tengah */
-            background-color: var(--accent-pink);
-            z-index: 10;
-        }
-
-        /* Tombol Jawaban Salah (Bisa Lari) */
-        #wrongBtn {
-            position: absolute;
-            /* Posisi awal manual supaya tidak tertumpuk */
-            top: 10%; 
-            left: 10%;
-            background-color: var(--accent-gray);
-            z-index: 20; /* Lebih tinggi dari tombol benar supaya kelihatan */
-            transition: top 0.1s ease, left 0.1s ease; /* Gerakan lebih responsif */
-        }
+        #btn-lari { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20; }
+        #btn-tetap { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; }
 
     </style>
 </head>
 <body>
 
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+
     <audio id="bgMusic" loop>
         <source src="melting-kali-uchis.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="bento-container">
-        
-        <div id="page1">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHl5eXl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5/xT9IgN8YK58hJ7kG5O/giphy.gif" class="pixel-gif" alt="Start">
-            <h1>LANA.EXE</h1>
-            <p>kubikin tadi malem jir, btw klik tombol dibawah yeah</p>
-            <button class="pixel-btn" onclick="startExperience()">[ BARA KEREN. ]</button>
+    <div class="container">
+
+        <div id="screen-intro">
+            <img src="https://i.pinimg.com/236x/1a/9a/cb/1a9acb61ed26d2ca1bd4a491a6ad88d9.jpg">
+            <h1>Selamat Pagi Lanaa</h1>
+            <p>Maafin aku ya, janji ga gitu lagi<br>real</p>
+            <button class="pixel-btn" onclick="nextScreen('screen-q1', true)">[ PENCET ]</button>
         </div>
 
-        <div id="page2" class="hidden">
-            <h1>> MESSAGE LOG</h1>
-            <p id="typing-text"></p>
-            <button class="pixel-btn" onclick="nextPage()">[ CONTINUE ]</button>
-        </div>
-
-        <div id="page3" class="hidden">
-            <h1>> VERIFICATION</h1>
-            <p style="font-size: 1.2rem; margin-bottom:10px;">siapa yang paling pendek?</p>
-            
-            <div id="quiz-area">
-                <button class="pixel-btn" id="correctBtn" onclick="finish()">Lana <3</button>
-                <button class="pixel-btn" id="wrongBtn">Bara</button>
+        <div id="screen-q1" class="hidden">
+            <h1>anuan 1/5</h1>
+            <p>Maaf kalo aku keterlaluan bercanda nya, dan..</p> 
+            <div class="btn-group">
+                <button class="pixel-btn" onclick="nextScreen('screen-q2')">lnjt</button>
+                <button class="pixel-btn" onclick="nextScreen('screen-q2')">bct</button>
             </div>
         </div>
 
-        <div id="page4" class="hidden">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExODl4eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5eHl4eGd5/pE12f8sTnlxW4/giphy.gif" class="pixel-gif" alt="Win">
-            <h1>> gasalah lagi</h1>
-            <p><br>lana paling pendek, <span style="color: #ff8e8e;">imut</span><br>wkwkwk semangat yaaa</p>
+        <div id="screen-q2" class="hidden">
+            <h1>Anuan 2/5</h1>
+            <p>Aku kesepian banget co asli dah, pls jangan gitu lagi</p>
+            <div class="btn-group">
+                <button class="pixel-btn" onclick="nextScreen('screen-q3')">masa</button>
+                <button class="pixel-btn" onclick="nextScreen('screen-q3')">boong</button>
+            </div>
+        </div>
+
+        <div id="screen-q3" class="hidden">
+            <h1>anuan 3/5</h1>
+            <p>bebas kamu mau jadi cegil kek apa kek</p>
+            <div class="btn-group">
+                <button class="pixel-btn" onclick="nextScreen('screen-q4')">y</button>
+                <button class="pixel-btn" onclick="nextScreen('screen-q4')">hm ok</button>
+            </div>
+        </div>
+
+        <div id="screen-q4" class="hidden">
+            <h1>anuan 4/5</h1>
+            <p>aku mau kenal kamu lebih deket</p>
+            <div class="btn-group">
+                <button class="pixel-btn" onclick="nextScreen('screen-q5')">g</button>
+                <button class="pixel-btn" onclick="nextScreen('screen-q5')">ok</button>
+            </div>
+        </div>
+
+        <div id="screen-q5" class="hidden">
+            <h1>terakhir</h1>
+            <p>janji ga diemin lagi?</p>
+            
+            <div id="tricky-area">
+                <button class="pixel-btn btn-yes" id="btn-tetap" onclick="nextScreen('screen-final')">oke e nya 10</button>
+                
+                <button class="pixel-btn btn-no" id="btn-lari" onmouseover="lari()" onclick="lari()">mager</button>
+            </div>
+        </div>
+
+        <div id="screen-final" class="hidden">
+            <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" class="gif-img">
+            <h1>the End</h1>
+            <p>stop jadi ceo kalideres <br> bai </p>
+            <button class="pixel-btn" onclick="location.reload()">[ REPLAY ]</button>
         </div>
 
     </div>
 
     <script>
-        // --- LOGIC ---
+        // Fungsi Pindah Halaman
+        function nextScreen(targetId, playMusic = false) {
+            const screens = document.querySelectorAll('.container > div');
+            screens.forEach(screen => screen.classList.add('hidden'));
+            document.getElementById(targetId).classList.remove('hidden');
 
-        // Setup Audio & Page Navigation
-        function startExperience() {
-            const music = document.getElementById('bgMusic');
-            music.volume = 0.5;
-            music.play().catch(e => console.log("Audio blocked"));
+            if (playMusic) {
+                const music = document.getElementById('bgMusic');
+                music.volume = 0.5;
+                music.play().catch(console.error);
+            }
+        }
+
+        // Logic Tombol Lari
+        function lari() {
+            const btn = document.getElementById('btn-lari');
+            const area = document.getElementById('tricky-area');
             
-            document.getElementById('page1').classList.add('hidden');
-            document.getElementById('page2').classList.remove('hidden');
-            
-            typeWriter("> Good morning lann, semangat yea upraknya, goodluck.", "typing-text");
-        }
-
-        function nextPage() {
-            document.getElementById('page2').classList.add('hidden');
-            document.getElementById('page3').classList.remove('hidden');
-            // Trigger posisi acak pertama kali saat halaman dibuka
-            moveButton(); 
-        }
-
-        function finish() {
-            document.getElementById('page3').classList.add('hidden');
-            document.getElementById('page4').classList.remove('hidden');
-        }
-
-        // --- CORE FIX: LOGIKA TOMBOL LARI ---
-        const wrongBtn = document.getElementById('wrongBtn');
-        const quizArea = document.getElementById('quiz-area');
-
-        function moveButton() {
-            // Hitung lebar area dikurangi lebar tombol
-            // Agar tombol tidak keluar garis (overflow)
-            const maxX = quizArea.clientWidth - wrongBtn.clientWidth - 20; 
-            const maxY = quizArea.clientHeight - wrongBtn.clientHeight - 20;
+            const maxX = area.clientWidth - btn.clientWidth - 20;
+            const maxY = area.clientHeight - btn.clientHeight - 20;
 
             const randomX = Math.floor(Math.random() * maxX);
             const randomY = Math.floor(Math.random() * maxY);
 
-            // Terapkan posisi baru
-            wrongBtn.style.left = randomX + 'px';
-            wrongBtn.style.top = randomY + 'px';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
         }
 
-        // Tambahkan Event Listener yang Agresif
-        // Ini memastikan tombol lari saat disentuh, diklik, atau didekati
-        wrongBtn.addEventListener('mouseover', moveButton);
-        wrongBtn.addEventListener('click', moveButton);
-        wrongBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Mencegah klik di HP
-            moveButton();
+        // Support Touchscreen
+        document.getElementById('btn-lari').addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            lari();
         });
-
-        // Typing Effect
-        function typeWriter(text, elementId) {
-            let i = 0;
-            const element = document.getElementById(elementId);
-            element.innerHTML = "";
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, 60);
-                } else {
-                    element.innerHTML += "<span class='blink'>_</span>";
-                }
-            }
-            type();
-        }
     </script>
-    
-    <style>
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-    </style>
+
 </body>
 </html>
